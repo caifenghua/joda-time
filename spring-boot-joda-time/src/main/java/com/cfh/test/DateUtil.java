@@ -81,6 +81,7 @@ public class DateUtil {
         return dateTime.toString(FORMAT_LONG);
     }
 
+    // 测试合并部分代码
     public static void main(String[] args) {
         Date date = strToDate("2019-09-11 03:55:55");
         Date date2 = strToDate("2019-09-12 03:55:55");
