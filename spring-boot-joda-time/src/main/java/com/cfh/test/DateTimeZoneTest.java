@@ -36,7 +36,7 @@ public class DateTimeZoneTest {
         DateTime dateTime3 = DateTime.now().toDateTime(gmt);
         System.out.println(dateTime3.toString("yyyy-MM-dd HH:mm:ss"));
 
-        DateTime date = DateTime.parse("04/02/2011 20:27:05",
+        DateTime date = DateTime.parse("10/02/2020 09:30:00",
                 DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss")).toDateTime(gmt);
         System.out.println(date.toDate().getTime());
         System.out.println(date.toString("yyyy-MM-dd HH:mm:ss"));
