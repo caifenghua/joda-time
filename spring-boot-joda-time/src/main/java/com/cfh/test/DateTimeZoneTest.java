@@ -40,5 +40,6 @@ public class DateTimeZoneTest {
                 DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss")).toDateTime(gmt);
         System.out.println(date.toDate().getTime());
         System.out.println(date.toString("yyyy-MM-dd HH:mm:ss"));
+        // 测
     }
 }
