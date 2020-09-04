@@ -61,6 +61,6 @@ public class DateTimeZoneTest {
 
         // 将date时间+1天[美国时区]
         DateTime minus1DayTime = new DateTime(new Date(), usZone).minusDays(1);
-        System.out.println(minus1DayTime.toString("yyyy-MM-dd HH:mm:ss"));
+        System.out.println("美国时区减去1天的时间为" + minus1DayTime.toString("yyyy-MM-dd HH:mm:ss"));
     }
 }
