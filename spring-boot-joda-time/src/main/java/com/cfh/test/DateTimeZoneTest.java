@@ -9,8 +9,8 @@ import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.TimeZone;
+import java.util.function.Supplier;
 
 /**
  * @描述
@@ -19,7 +19,7 @@ import java.util.TimeZone;
  */
 public class DateTimeZoneTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // 指定时区构造时间
         String dateTime = new DateTime(DateTimeZone.forTimeZone(TimeZone.getTimeZone("Asia/Shanghai"))).toString("yyyy-MM-dd HH:mm:ss");
         String dateTimeGmt = new DateTime(DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT+8"))).toString("yyyy-MM-dd HH:mm:ss");
@@ -59,11 +59,9 @@ public class DateTimeZoneTest {
                 DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")).toDateTime(usZone);
         System.out.println("[美国时区]字符串转joda时间：" + str2DateTimeUs.toString("yyyy-MM-dd HH:mm:ss"));
 
-        // 将date时间+1天[美国时区]
+        // 将date时间-1天[美国时区]
         DateTime minus1DayTime = new DateTime(new Date(), usZone).minusDays(1);
         System.out.println("美国时区减去1天的时间为" + minus1DayTime.toString("yyyy-MM-dd HH:mm:ss"));
-        // 测试 版本回退2
 
-        // 测试undo commit
     }
 }
