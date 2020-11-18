@@ -88,6 +88,9 @@ public class Test {
         // 获取本周周五 17：00
         DateTime dateTime8 = dateTime.withDayOfWeek(DateTimeConstants.FRIDAY).withTime(17, 30, 0, 0);
         System.out.println("本周周五15点时间为" + dateTime8.toString("yyyy-MM-dd HH:mm:ss"));
+        // 获取当天是一周的第几天
+        int dayOfWeek = dateTime.withDayOfWeek(DateTimeConstants.SUNDAY).getDayOfWeek();
+        System.out.println(dayOfWeek);
     }
 
 }
