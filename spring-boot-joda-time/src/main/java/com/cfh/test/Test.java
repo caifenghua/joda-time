@@ -1,9 +1,15 @@
 package com.cfh.test;
 
+import com.github.benmanes.caffeine.cache.Cache;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
+import org.springframework.beans.factory.annotation.Qualifier;
 
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @ClassName Test
@@ -12,6 +18,14 @@ import java.util.Locale;
  * @CreateDate: 2019/9/10 14:02
  */
 public class Test {
+
+
+    private static Cache<String, Object> ipInfoCaffeine;
+
+    public Test(@Qualifier("ipInfoCaffeine")Cache<String, Object> ipInfoCaffeine) {
+        Test.ipInfoCaffeine = ipInfoCaffeine;
+    }
+
     public static void main(String[] args) {
         // 获取当前时间
         DateTime dateTime = new DateTime();
@@ -69,11 +83,14 @@ public class Test {
         String endTimeOfLastWeek = dateTime.minusWeeks(1).withDayOfWeek(DateTimeConstants.SUNDAY).millisOfDay().withMaximumValue().toString("yyyy-MM-dd HH:mm:ss");
         System.out.println("上周结束时间是:"+ endTimeOfLastWeek);
         // 获取当天指定时间 17 ： 00
-        DateTime dateTime7 = dateTime.withTime(17, 30, 0, 0);
+        DateTime dateTime7 = dateTime.withTime(8, 59, 59, 0);
         System.out.println("当天15点时间为" + dateTime7.toString("yyyy-MM-dd HH:mm:ss"));
         // 获取本周周五 17：00
         DateTime dateTime8 = dateTime.withDayOfWeek(DateTimeConstants.FRIDAY).withTime(17, 30, 0, 0);
         System.out.println("本周周五15点时间为" + dateTime8.toString("yyyy-MM-dd HH:mm:ss"));
+        // 获取当天是一周的第几天
+        int dayOfWeek = dateTime.withDayOfWeek(DateTimeConstants.SUNDAY).getDayOfWeek();
+        System.out.println(dayOfWeek);
         // 字符串转dateTime
         DateTime dateTime9 = new DateTime("2019-09-11 03:55:55");
         System.out.println("字符串转时间为：" + dateTime9);
