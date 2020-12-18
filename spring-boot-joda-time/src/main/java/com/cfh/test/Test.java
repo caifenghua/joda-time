@@ -3,6 +3,7 @@ package com.cfh.test;
 import com.github.benmanes.caffeine.cache.Cache;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
@@ -91,6 +92,11 @@ public class Test {
         // 获取当天是一周的第几天
         int dayOfWeek = dateTime.withDayOfWeek(DateTimeConstants.SUNDAY).getDayOfWeek();
         System.out.println(dayOfWeek);
+
+        DateTime addOneDay = DateTime.parse("2020-10-01",
+                DateTimeFormat.forPattern("yyyy-MM-dd")).toDateTime().plusDays(1);
+        System.out.println(addOneDay.toString("yyyy-MM-dd"));
+
     }
 
 }

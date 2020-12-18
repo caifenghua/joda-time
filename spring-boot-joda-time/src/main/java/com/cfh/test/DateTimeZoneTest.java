@@ -4,6 +4,7 @@ import org.apache.commons.lang3.time.FastDateFormat;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -33,13 +34,12 @@ public class DateTimeZoneTest {
         // 将美国时间转化为北京时间
         // 1、将北京时间转化成美国时间
         DateTimeZone usZone = DateTimeZone.forID("America/New_York");
-        DateTime usDateTime = DateTime.now().toDateTime(usZone);
+        DateTime usDateTime = DateTime.now().toLocalDateTime().toDateTime(usZone);
         String usDateTimeStr = usDateTime.toString("yyyy-MM-dd HH:mm:ss");
         System.out.println("美国时间为 ： " + usDateTimeStr);
         // 2、将美国时间切换成中国时间
         DateTimeZone chinaZone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT+8"));
-        DateTime chinaDateTime = DateTime.parse(usDateTimeStr,
-                DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")).toDateTime(chinaZone);
+        DateTime chinaDateTime = usDateTime.toDateTime(chinaZone);
         System.out.println("joda美国时间转中国时间 ： " + chinaDateTime.toString("yyyy-MM-dd HH:mm:ss"));
 
         // FastDateFormat 将美国时间转化为北京时间
@@ -51,11 +51,11 @@ public class DateTimeZoneTest {
         System.out.println("FastDateFormat美国时间转中国时间 = " + s1);
 
         // joda 将字符串转为dateTime
-        DateTime str2DateTime = DateTime.parse("2020-09-04 21:00:00",
+        DateTime str2DateTime = DateTime.parse("2020-09-04 09:30:00",
                 DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")).toDateTime();
         System.out.println("[默认本地时区]字符串转joda时间：" + str2DateTime.toString("yyyy-MM-dd HH:mm:ss"));
         // joda 将字符串转为dateTime
-        DateTime str2DateTimeUs = DateTime.parse("2020-09-04 21:00:00",
+        DateTime str2DateTimeUs = DateTime.parse("2020-09-04 09:30:00",
                 DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")).toDateTime(usZone);
         System.out.println("[美国时区]字符串转joda时间：" + str2DateTimeUs.toString("yyyy-MM-dd HH:mm:ss"));
 
@@ -63,5 +63,14 @@ public class DateTimeZoneTest {
         DateTime minus1DayTime = new DateTime(new Date(), usZone).minusDays(1);
         System.out.println("美国时区减去1天的时间为" + minus1DayTime.toString("yyyy-MM-dd HH:mm:ss"));
 
+        // 美国时间转中国时间2
+        DateTimeZone usZone22 = DateTimeZone.forID("America/New_York");
+        DateTime usDateTime22 = DateTime.parse("2020-09-04 09:30:00",
+                DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")).toLocalDateTime().toDateTime(usZone22);
+        DateTimeZone chinaZone22 = DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT+8"));
+        DateTime chinaDateTime22 = usDateTime22.toDateTime(chinaZone22);
+        System.out.println("joda美国时间转中国时间 ： " + chinaDateTime22.toString("yyyy-MM-dd HH:mm:ss"));
     }
+
+
 }
