@@ -3,6 +3,7 @@ package com.cfh.test;
 import org.apache.commons.lang3.time.FastDateFormat;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
@@ -65,12 +66,27 @@ public class DateTimeZoneTest {
 
         // 美国时间转中国时间2
         DateTimeZone usZone22 = DateTimeZone.forID("America/New_York");
-        DateTime usDateTime22 = DateTime.parse("2020-09-04 09:30:00",
+        DateTime usDateTime22 = DateTime.parse("2020-12-21 09:30:00",
                 DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")).toLocalDateTime().toDateTime(usZone22);
         DateTimeZone chinaZone22 = DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT+8"));
         DateTime chinaDateTime22 = usDateTime22.toDateTime(chinaZone22);
         System.out.println("joda美国时间转中国时间 ： " + chinaDateTime22.toString("yyyy-MM-dd HH:mm:ss"));
+
+        DateTimeZone usZone222 = DateTimeZone.forID("America/New_York");
+        DateTime usDateTime222 = DateTime.parse("2020-12-18 00:09:30",
+                DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")).toLocalDateTime().toDateTime(usZone222);
+        DateTimeZone chinaZone222 = DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT+8"));
+        Date beginDate22 = usDateTime222.toDateTime(chinaZone222).toDate();
+
+        System.out.println("2020-12-18" + " " + "00:09:30");
+        System.out.println(beginDate22.getTime());
+        // 北京时间转美东时间
+        Long a = 1608820200000L;
+        LocalDateTime dateTime1 = new LocalDateTime(a, usZone);
+        System.out.println(dateTime1.toString("yyyy-MM-dd HH:mm:ss"));
+        System.out.println(dateTime1.toDate().getTime());
     }
+
 
 
 }
